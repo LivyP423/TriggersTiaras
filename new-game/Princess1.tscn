@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cqsh6xpp1dv5p"]
+
+[ext_resource type="Script" uid="uid://bm56bh0xaoby1" path="res://princess_1.gd" id="1_2h80p"]
+[ext_resource type="Texture2D" uid="uid://v0r1durgj8c6" path="res://Assets/Princesses/pixilart-drawing (1).png" id="1_v3uy6"]
+[ext_resource type="Texture2D" uid="uid://r8bb0osc5rx8" path="res://Assets/Princesses/pixil-frame-0 (1).png" id="2_2h80p"]
+[ext_resource type="Texture2D" uid="uid://dbaojgpxaw14n" path="res://Assets/Princesses/pixil-frame-0.png" id="3_wamr3"]
+[ext_resource type="Texture2D" uid="uid://2kppoe0hrwac" path="res://Health/empty.png" id="5_1etl0"]
+[ext_resource type="Texture2D" uid="uid://dpptut0eii6sv" path="res://Health/human.png" id="6_6nubx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v7oki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v3uy6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wamr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2h80p")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hiqwa"]
+size = Vector2(12, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dk5gl"]
+size = Vector2(15, 20)
+
+[node name="Node2D" type="CharacterBody2D" unique_id=1267237276]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_2h80p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=675307461]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_v7oki")
+animation = &"walk"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2062526203]
+texture_filter = 1
+offset_left = -7.0
+offset_top = -24.000002
+offset_right = 33.0
+offset_bottom = 15.999998
+scale = Vector2(1.3199998, 1.1199999)
+max_value = 6.0
+texture_under = ExtResource("5_1etl0")
+texture_progress = ExtResource("6_6nubx")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1674749528]
+scale = Vector2(1.28, 1.0800002)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=96176345]
+position = Vector2(0, 0.37037084)
+scale = Vector2(0.90625185, 1)
+shape = SubResource("RectangleShape2D_hiqwa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=615330333]
+position = Vector2(0, 0.5)
+scale = Vector2(0.87585413, 1)
+shape = SubResource("RectangleShape2D_dk5gl")
+debug_color = Color(0.8614158, 0.17032069, 0.77897596, 0.41960785)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

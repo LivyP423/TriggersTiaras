@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d2cw6en8i7ewa"]
+
+[ext_resource type="Texture2D" uid="uid://wu4c6tfsa8gi" path="res://Assets/Misc/potion.png" id="1_bcips"]
+[ext_resource type="Script" uid="uid://bmeuf2msowbfy" path="res://potion.gd" id="2_174ht"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tqvvy"]
+radius = 4.54702
+
+[node name="Potion" type="Sprite2D" unique_id=1891561055]
+texture_filter = 1
+position = Vector2(0, -4.7683716e-07)
+scale = Vector2(2.4545453, 2.6)
+texture = ExtResource("1_bcips")
+script = ExtResource("2_174ht")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=460676895]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1113707033]
+position = Vector2(0, 0.38461557)
+scale = Vector2(1, 1.3076918)
+shape = SubResource("CircleShape2D_tqvvy")
+debug_color = Color(0.7607843, 0.105882354, 0.2901961, 0.47843137)
+
+[node name="Timer" type="Timer" parent="." unique_id=1104095119]
+wait_time = 6.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
